@@ -35,17 +35,22 @@ def main():
 
             motion_count += 1
 
+            runtime = datetime.now() - session_start
+
+            session_duration = str(runtime).split(".")[0]
+
             last_detection = datetime.now().strftime("%m/%d/%Y %I:%M:%S %p")
 
             turn_on()
 
-            log_event()
+            log_event(session_duration)
 
             generate_report()
 
             print("\n========== Motion Detected ==========")
             print(f"Motion Event #: {motion_count}")
             print(f"Last Detection: {last_detection}")
+            print(f"Session Time : {session_duration}")
             print("CSV Updated")
             print("PDF Updated")
             print("=====================================\n")

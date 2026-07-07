@@ -5,13 +5,10 @@ Generates a PDF report from the motion log.
 """
 
 import csv
-
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus import Paragraph
+from reportlab.platypus import SimpleDocTemplate, Paragraph
 
-from config import LOG_FILE
-from config import PDF_REPORT
+from config import LOG_FILE, PDF_REPORT
 
 
 def generate_report():
@@ -22,7 +19,13 @@ def generate_report():
 
     story = []
 
-    story.append(Paragraph("<b>Wildlife Motion Detection Report</b>", styles["Heading1"]))
+    story.append(
+        Paragraph(
+            "<b>Wildlife Motion Detection Report</b>",
+            styles["Heading1"]
+        )
+    )
+
     story.append(Paragraph("<br/>", styles["Normal"]))
 
     with open(LOG_FILE, "r") as csvfile:
@@ -37,13 +40,20 @@ def generate_report():
             date = row[1]
             time = row[2]
 
+            if len(row) >= 4:
+                session = row[3]
+            else:
+                session = "N/A"
+
+            text = (
+                f"<b>Detection #{detection}</b><br/>"
+                f"Date: {date}<br/>"
+                f"Time: {time}<br/>"
+                f"Session Duration: {session}<br/><br/>"
+            )
+
             story.append(
-                Paragraph(
-                    f"<b>Detection #{detection}</b><br/>"
-                    f"Date: {date}<br/>"
-                    f"Time: {time}<br/><br/>",
-                    styles["Normal"]
-                )
+                Paragraph(text, styles["Normal"])
             )
 
     document.build(story)

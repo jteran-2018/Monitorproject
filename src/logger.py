@@ -11,7 +11,7 @@ from datetime import datetime
 
 from config import LOG_FILE
 
-def log_event():
+def log_event(session_duration):
     """
     Saves one motion detection event to the CSV file.
     """
@@ -31,7 +31,7 @@ def log_event():
 
         # Write header only once
         if not file_exists:
-            writer.writerow(["Detection", "Date", "Time"])
+            writer.writerow(["Detection", "Date", "Time", "Session Duration"])
 
         # Count previous detections
         detection_number = 1
@@ -40,6 +40,6 @@ def log_event():
             with open(LOG_FILE, "r") as f:
                 detection_number = sum(1 for line in f)
 
-        writer.writerow([detection_number, date, time])
+        writer.writerow([detection_number, date, time, session_duration])
 
     print("[LOGGER] Event saved.")
