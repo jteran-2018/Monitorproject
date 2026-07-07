@@ -1,0 +1,19 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# VS Code settings
+.vscode/
+
+# Generated project files
+logs/*.csv
+reports/*.pdf
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
