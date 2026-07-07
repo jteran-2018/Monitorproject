@@ -9,8 +9,7 @@ import os
 from datetime import datetime
 
 
-LOG_FILE = "../logs/motion_log.csv"
-
+from config import LOG_FILE
 
 def log_event():
     """

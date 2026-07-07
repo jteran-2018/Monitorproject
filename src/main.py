@@ -6,6 +6,8 @@ Main entry point for the Wildlife Motion Detection System.
 
 from sensor import wait_for_motion
 from led import turn_on, turn_off
+from logger import log_event
+from pdf_report import generate_report
 
 
 def main():
@@ -20,6 +22,10 @@ def main():
         wait_for_motion()
 
         turn_on()
+
+        log_event()
+
+        generate_report()
 
         print("Processing motion event...\n")
 

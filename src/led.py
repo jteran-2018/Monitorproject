@@ -1,16 +1,26 @@
 """
 led.py
-
-Simulates an LED during development.
-Later, this file will control the real LED on the Raspberry Pi.
 """
+
+from config import SIMULATION_MODE
+
+if not SIMULATION_MODE:
+    from gpiozero import LED
+
+    led = LED(18)
 
 
 def turn_on():
-    """Simulate turning the LED on."""
-    print("[LED] ON")
+
+    if SIMULATION_MODE:
+        print("[LED] ON")
+    else:
+        led.on()
 
 
 def turn_off():
-    """Simulate turning the LED off."""
-    print("[LED] OFF")
+
+    if SIMULATION_MODE:
+        print("[LED] OFF")
+    else:
+        led.off()
